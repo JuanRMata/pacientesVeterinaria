@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Formulario() {
+function Formulario({  pacientes, setPacientes }) {
   const [nombre, setNombre] = useState("");
   //nombre es el nombre de la variable, setNombre es el que tiene que modificar esa variable
   // y lo que esta dentro de () es el valor inicial
@@ -21,7 +21,17 @@ function Formulario() {
     }else {
       setError(false)
     }
-  };
+    const objetoPacientes = {
+      nombre,
+      propietario,
+      email,
+      fecha,
+      sintomas
+    }
+    setPacientes([...pacientes, objetoPacientes])
+    console.log(setPacientes)
+  }
+
   return (
     <div className=" md:w-1/2 lg:w-2/5 mx-5">
       <h1 className=" font-black text-3xl text-center">
