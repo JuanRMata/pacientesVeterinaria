@@ -1,6 +1,7 @@
 import Pacientes from "./Pacientes"
 
-function ListadoPacientes() {
+function ListadoPacientes({pacientes}) { //Aqui estamos extrayendo el prop de pacientes
+  
   return (
     <div className=" md:w-1/2 lg:w-3/5 md:h-screen overflow-y-scroll mx-5">
       <h1 className=" font-black text-center text-3xl mb-5">
@@ -10,10 +11,13 @@ function ListadoPacientes() {
         Administra tus {""}
         <span className=" text-indigo-500 font-bold">Pacientes y citas</span>
       </p>
-        <Pacientes />
-        <Pacientes />
-        <Pacientes />
-        <Pacientes />
+        { pacientes.map( ()=>{
+
+          return(
+            <h1>Desde map</h1>
+          )
+        })}
+        <Pacientes/>
     </div>
   )
 }

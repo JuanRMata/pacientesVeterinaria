@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Error from "./Error";
 
 function Formulario({  pacientes, setPacientes }) {
   const [nombre, setNombre] = useState("");
@@ -20,16 +21,23 @@ function Formulario({  pacientes, setPacientes }) {
       setError(true)
     }else {
       setError(false)
+      const objetoPacientes = {
+        nombre,
+        propietario,
+        email,
+        fecha,
+        sintomas
+      }
+      //ASIGNANDO UN NUEVO OBJETO A UNA COPIA DE PACIENTES QUE ANTES YA ESTABA CREADA
+      setPacientes([...pacientes, objetoPacientes])
+      //REINICIANDO EL FORMULARIO
+      setNombre('')
+      setPropietario('')
+      setEmail('')
+      setFecha('')
+      setSintomas('')
     }
-    const objetoPacientes = {
-      nombre,
-      propietario,
-      email,
-      fecha,
-      sintomas
-    }
-    setPacientes([...pacientes, objetoPacientes])
-    console.log(setPacientes)
+
   }
 
   return (
@@ -45,13 +53,25 @@ function Formulario({  pacientes, setPacientes }) {
 
       <form
         className=" bg-white shadow-md rounded-md py-5 px-5 mx-5 mb-5"
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit} //handleSubmit es el nombre de la variable que se va a encontrar en JS el cual va a contener la funcion del onSubmit
       >
-        {error && (
-          <div className=" bg-red-700 p-2 text-white rounded-md text-center font-bold uppercase mb-3">
-            <p>Todos los campos son obligatorios</p>
-          </div>
-        )}
+        {/* && es como un if, quiere decir que si la variable error es true va a ejecutar el componente importado <Error/>> */}
+        {/*Aqui se crea un prop al cual le llamamos mensaje, para poderlo replicar en mas partes de esta pagina  */}
+
+        {/*{error && <Error mensaje='Todos los campos son obligatorios'/>}*/} 
+
+        {/*Esta es una forma de utilizarlo ya dentro del archivo Error.jsx tendremos que especificar el prop mensaje 
+        asi como tambien mandar a llamar la prop dentro de donde queramos que este actuando */}
+
+        {error && <Error>
+
+                <p>Todos los campos son obligarotios</p>
+            
+            </Error>}
+        {/* Al hacerlo de esta forma abriendo y cerrando la etiqueta del componente Error podemos insertar mas codigo html solo que
+        para poder llamarlo dentro del archivo Error.jsx tendremos que especificarlo con la palabra reservada children*/}
+
+
         <div className=" mb-5">
           <label
             htmlFor="mascota"
