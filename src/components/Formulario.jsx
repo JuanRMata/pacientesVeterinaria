@@ -11,6 +11,12 @@ function Formulario({  pacientes, setPacientes }) {
   const [sintomas, setSintomas] = useState("");
   const[error,setError] = useState(false)
 
+  const generarId = () => {
+    const random = Math.random().toString(36).substr(2)
+    const fecha = Date.now().toString(36)
+    
+    return random + fecha
+  }
   //Dentro de los inputs al usar useState deberemos de colocar value={nombreDeLaVariable} en este caso nombre y no setNombre que es el modificador
 
   const handleSubmit = (evento) => {
@@ -26,7 +32,8 @@ function Formulario({  pacientes, setPacientes }) {
         propietario,
         email,
         fecha,
-        sintomas
+        sintomas,
+        id : generarId() //aqui estamos generando un id unico para cada paciente
       }
       //ASIGNANDO UN NUEVO OBJETO A UNA COPIA DE PACIENTES QUE ANTES YA ESTABA CREADA
       setPacientes([...pacientes, objetoPacientes])
