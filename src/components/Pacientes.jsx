@@ -26,9 +26,23 @@ function Pacientes({paciente}) {
       <p className=" font-bold mb-3 text-gray-700 uppercase">
         Síntomas {""}
         <span className="font-normal normal-case">
-          {paciente.sintomas}
+          {sintomas}
         </span>
       </p>
+      <div className=" flex justify-end">
+        <button 
+          type="button" 
+          className=" bg-red-500 rounded-md text-white font-bold px-5 py-2 uppercase hover:bg-red-700 transition-all">
+          Eliminar
+        </button>
+
+        <button 
+          type="button" 
+          className=" bg-indigo-500 rounded-md text-white font-bold px-5 py-2 uppercase ml-5 hover:bg-indigo-700 transition-all">
+          Editar
+        </button>
+      </div>
+
     </div>
   );
 }
