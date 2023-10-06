@@ -6,6 +6,7 @@ import ListadoPacientes from "./components/ListadoPacientes"
 
 function App() {
   const [pacientes,setPacientes] = useState([]) //Aqui vamos a llenar los datos con los del useState que tenemos en Formulario
+  const [paciente, setPaciente] = useState({})
 
   return (
 
@@ -15,9 +16,11 @@ function App() {
           <Formulario
               pacientes = {pacientes}
               setPacientes = {setPacientes}
+              paciente={paciente}
           />
           <ListadoPacientes
             pacientes={pacientes}
+            setPaciente={setPaciente}
           />
       </div>
     </div>

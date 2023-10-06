@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Error from "./Error";
 
-function Formulario({  pacientes, setPacientes }) {
+function Formulario({  pacientes, setPacientes, paciente }) {
   const [nombre, setNombre] = useState("");
   //nombre es el nombre de la variable, setNombre es el que tiene que modificar esa variable
   // y lo que esta dentro de () es el valor inicial
@@ -10,6 +10,14 @@ function Formulario({  pacientes, setPacientes }) {
   const [fecha, setFecha] = useState("");
   const [sintomas, setSintomas] = useState("");
   const[error,setError] = useState(false)
+
+  useEffect(() => {
+    
+      console.log(paciente) 
+    
+  
+  },[paciente])
+
 
   const generarId = () => {
     const random = Math.random().toString(36).substr(2)

@@ -1,7 +1,8 @@
 import Pacientes from "./Pacientes"
 
-function ListadoPacientes({pacientes}) { //Aqui estamos extrayendo el prop de pacientes desde Formulario
-  
+function ListadoPacientes({pacientes, setPaciente}) { //Aqui estamos extrayendo el prop de pacientes desde Formulario
+
+
   return (
     <div className=" md:w-1/2 lg:w-3/5 md:h-screen overflow-y-scroll mx-5">
       {pacientes && pacientes.length ?  
@@ -17,10 +18,11 @@ function ListadoPacientes({pacientes}) { //Aqui estamos extrayendo el prop de pa
           <Pacientes
             key={paciente.id} // Aqui tenemos que establecer el id previo que generamos para que su apartado en el formulario cuente con el mismo id
             paciente = {paciente}
-          
+            setPaciente = {setPaciente}
           />
         
-      )}
+      )
+      }
       </>
       :
       <>
