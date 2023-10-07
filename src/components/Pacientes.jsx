@@ -1,9 +1,16 @@
 
 
 
-function Pacientes({paciente,setPaciente}) {
+function Pacientes({paciente,setPaciente,eliminarPaciente}) {
 
-  const { nombre, propietario, email, fecha, sintomas } = paciente
+  const { nombre, propietario, email, fecha, sintomas, id } = paciente
+const handleEliminar = () => {
+  const respuesta = confirm('Deseas eliminar ese paciente')
+  if(respuesta){
+    eliminarPaciente(id)
+  }
+}
+
   return (
     <div className=" bg-white shadow-md mx-5 px-5 py-10 rounded-md mb-5">
       <p className=" font-bold mb-3 text-gray-700 uppercase">
@@ -31,7 +38,8 @@ function Pacientes({paciente,setPaciente}) {
       <div className=" flex justify-end">
         <button 
           type="button" 
-          className=" bg-red-500 rounded-md text-white font-bold px-5 py-2 uppercase hover:bg-red-700 transition-all">
+          className=" bg-red-500 rounded-md text-white font-bold px-5 py-2 uppercase hover:bg-red-700 transition-all"
+          onClick={handleEliminar}>
           Eliminar
         </button>
 

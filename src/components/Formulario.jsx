@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Error from "./Error";
 
-function Formulario({  pacientes, setPacientes, paciente }) {
+function Formulario({  pacientes, setPacientes, paciente, setPaciente }) {
   const [nombre, setNombre] = useState("");
   //nombre es el nombre de la variable, setNombre es el que tiene que modificar esa variable
   // y lo que esta dentro de () es el valor inicial
@@ -12,10 +12,14 @@ function Formulario({  pacientes, setPacientes, paciente }) {
   const[error,setError] = useState(false)
 
   useEffect(() => {
-    
-      console.log(paciente) 
-    
-  
+      if(Object.keys(paciente).length > 0){// Object.keys sirve para poder preguntar si un arreglo esta vacio
+        setNombre(paciente.nombre)
+        setPropietario(paciente.propietario)
+        setEmail(paciente.email)
+        setFecha(paciente.fecha)
+        setSintomas(paciente.sintomas)
+
+      }
   },[paciente])
 
 
@@ -33,6 +37,7 @@ function Formulario({  pacientes, setPacientes, paciente }) {
     if ( [nombre, propietario, email, fecha, sintomas ].includes('')) {
       // .includes, es para iterar dentro de cada variable y ver si alguno tiene lo que esta entre parentesis
       setError(true)
+      return
     }else {
       setError(false)
       const objetoPacientes = {
@@ -40,11 +45,27 @@ function Formulario({  pacientes, setPacientes, paciente }) {
         propietario,
         email,
         fecha,
-        sintomas,
-        id : generarId() //aqui estamos generando un id unico para cada paciente
+        sintomas
       }
-      //ASIGNANDO UN NUEVO OBJETO A UNA COPIA DE PACIENTES QUE ANTES YA ESTABA CREADA
-      setPacientes([...pacientes, objetoPacientes])
+
+      if(paciente.id){ // aqui estamos viendo si estamos editando o si estamos agregando un nuevo registro
+        // Editando el registro
+        objetoPacientes.id = paciente.id //Aqui estamos asignandole el mismo ID que tuvo cuando se hizo el registro
+
+        const pacientesActualizados = pacientes.map(pacienteState => pacienteState.id === 
+          paciente.id ? objetoPacientes : pacienteState)
+
+          setPacientes(pacientesActualizados)
+          setPaciente({})
+
+
+      }else{
+        //Nuevo registro
+        //ASIGNANDO UN NUEVO OBJETO A UNA COPIA DE PACIENTES QUE ANTES YA ESTABA CREADA
+        objetoPacientes.id = generarId()
+        setPacientes([...pacientes, objetoPacientes])
+      }
+      
       //REINICIANDO EL FORMULARIO
       setNombre('')
       setPropietario('')
@@ -170,7 +191,7 @@ function Formulario({  pacientes, setPacientes, paciente }) {
         <input
           type="submit"
           className=" bg-indigo-500 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 rounded-md cursor-pointer transition-all"
-          value="Agregar paciente"
+          value={paciente.id ? 'Editar paciente' : 'Agregar paciente'}
         />
       </form>
     </div>

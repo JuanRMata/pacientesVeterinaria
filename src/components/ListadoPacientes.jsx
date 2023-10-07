@@ -1,6 +1,6 @@
 import Pacientes from "./Pacientes"
 
-function ListadoPacientes({pacientes, setPaciente}) { //Aqui estamos extrayendo el prop de pacientes desde Formulario
+function ListadoPacientes({pacientes, setPaciente, eliminarPaciente}) { //Aqui estamos extrayendo el prop de pacientes desde Formulario
 
 
   return (
@@ -19,6 +19,7 @@ function ListadoPacientes({pacientes, setPaciente}) { //Aqui estamos extrayendo 
             key={paciente.id} // Aqui tenemos que establecer el id previo que generamos para que su apartado en el formulario cuente con el mismo id
             paciente = {paciente}
             setPaciente = {setPaciente}
+            eliminarPaciente={eliminarPaciente}
           />
         
       )
